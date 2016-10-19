@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://fanyi.youdao.com/openapi?path=data-mode -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>有道翻译API</title>
+    <meta name="description" content="有道翻译API">
+        <link rel="shortcut icon" type="image/x-icon" href="http://shared.ydstatic.com/images/favicon.ico">
+            <link rel="stylesheet" type="text/css" href="./有道翻译API_files/interface-packed.css">
+    </head>
+
+<body>
+<div id="page">
+
+    <div id="hd">
+        <div id="siteNav">
+    <h1><a class="logo" href="http://fanyi.youdao.com/openapi">有道翻译API</a></h1>
+    <span class="link"><a href="http://www.youdao.com/" target="_blank" rel="nofollow">有道首页&nbsp;</a> |
+        <a href="http://www.youdao.com/about/productlist.html" target="_blank" rel="nofollow">&nbsp;更多有道产品</a></span>
+</div>
+<ul id="globalNav">
+    <li><a href="http://fanyi.youdao.com/openapi">首&nbsp;&nbsp;页</a></li>
+    <li><a href="http://fanyi.youdao.com/openapi?path=web-mode">添加网页模块</a></li>
+    <li class="current"><a href="http://fanyi.youdao.com/openapi?path=data-mode">调用数据接口</a></li>
+    <li><a href="http://fanyi.youdao.com/openapi?path=case">经典案例</a></li>
+    <li><a href="http://fanyi.youdao.com/openapi?path=faq">常见问题</a></li>
+</ul>
+
+        <div class="banner data-mode">
+            <div class="bannerContents">
+                <dl>
+                    <dt>有道翻译数据接口是什么？</dt>
+                    <dd>有道翻译提供了翻译和查词的数据接口。通过数据接口，您可以获得一段文本的翻译结果或者查词结果。</dd>
+                    <dt>为什么要使用数据接口？</dt>
+                    <dd>通过调用有道翻译API数据接口，您可以在您的网站或应用中更灵活地定制翻译和查词功能。</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <div id="bd">
+        <div class="mod step apply-success">
+    <h2 class="hd">
+                    申请key<span class="gc">(在使用有道翻译API前，您需要先申请key)</span>
+            </h2>
+
+    <div class="bd">
+        <form class="bd-1">
+            <p>
+                <label for="siteName">应用名称：</label>
+                <input id="siteName" name="siteName" type="text">
+                <span class="tip">6~18个字符，包括字母/数字/连字符，开头和结尾必须是字母或数字</span>
+                <span class="strong error"></span>
+            </p>
+
+            <div id="siteNameMsg" class="error-msg invisible"></div>
+            <p>
+                <label for="siteAddr">应用地址：</label>
+                <input id="siteAddr" name="siteAddr" type="text" value="http://">
+                <span class="tip">在此填写应用所在网站或应用的支持网站</span>
+            </p>
+
+            <div id="siteAddrMsg" class="error-msg invisible"></div>
+            <p>
+                <label for="siteInfo" class="forText">应用说明：</label>
+                <textarea id="siteInfo" name="siteInfo"></textarea>
+                <span class="tip forText">在此描述您的网站或应用，不超过200字</span>
+            </p>
+
+            <div id="siteInfoMsg" class="error-msg invisible"></div>
+            <p>
+                <label for="contact">联系邮箱：</label>
+                <input id="contact" name="contact" type="text">
+                <span class="tip">留下邮箱以便我们将您申请的key通过邮件发送给您保存</span>
+            </p>
+
+            <div id="contactMsg" class="error-msg invisible"></div>
+            <p class="accept">
+                <input id="acceptIt" type="checkbox">
+                <label for="acceptIt">我接受 <a href="http://www.youdao.com/help/fanyiapi/privacy" target="_blank">有道翻译API使用条款</a>
+                </label>
+            </p>
+
+            <div id="acceptItMsg" class="error-msg invisible">请接受使用条款</div>
+
+            <p class="applyWrapper">
+                <a id="apply" class="apply" href="javascript:void(0)">申请</a>
+            </p>
+        </form>
+        <div id="applyResult" class="bd-suc hidden" style="display: block;">
+            <h3 class="strong">有道翻译API申请成功</h3>
+
+            <div class="keyValue">
+                <h4><span class="strong">API key</span>：<span id="key">1012409051</span></h4>
+                <h4><span class="strong">keyfrom</span>：<span id="keyfrom">wordskeeper</span></h4>
+            </div>
+            <ul>
+                <li>创建时间：<span id="resultDate">2016-10-19</span></li>
+                <li>网站名称：<span id="resultSiteName">wordskeeper</span></li>
+                <li>网站地址：<span id="resultSiteAddr">http://wordskeeper.com</span></li>
+            </ul>
+        </div>
+        <ul class="bd-2">
+            <li class="border">使用<span class="strong">API key</span>
+                <span>时，请求频率限制为每小时1000次，超过限制会被封禁。</span></li>
+            <li><span>如果您的应用确实需要超过每小时1000次请求，请参考“常见问题”中的相关信息与我们联系。</span></li>
+        </ul>
+    </div>
+    <div class="ft">
+        <span class="ft-a"></span><span class="ft-b"></span><span class="ft-c"></span>
+    </div>
+</div>
+
+        <div class="mod step">
+            <h2 class="hd">使用API</h2>
+
+            <div class="bd">
+                <div class="lInter">
+                    <h3>数据接口</h3>
+
+                    <div class="has-bg">
+                        <span class="host">http://fanyi.youdao.com/openapi.do?</span><span class="path">keyfrom=<span class="realKeyfrom">wordskeeper</span>&amp;key=<span class="realKey">1012409051</span></span><span class="para">&amp;type=data&amp;doctype=&lt;doctype&gt;&amp;version=1.1</span><span class="query">&amp;q=要翻译的文本</span>
+                    </div>
+                </div>
+                <div class="lInter">
+                    <p class="code">版本：1.1，请求方式：get，编码方式：utf-8</p>
+
+                    <p class="code">主要功能：中英互译，同时获得有道翻译结果和有道词典结果（可能没有）</p>
+
+                    <p class="code">参数说明：</p>
+<p class="code">　type - 返回结果的类型，固定为data</p>
+<p class="code">　doctype - 返回结果的数据格式，xml或json或jsonp</p>
+<p class="code">　version - 版本，当前最新版本为1.1</p>
+<p class="code">　q - 要翻译的文本，必须是UTF-8编码，字符长度不能超过200个字符，需要进行urlencode编码</p>
+<p class="code">　only - 可选参数，dict表示只获取词典数据，translate表示只获取翻译数据，默认为都获取</p>
+<p class="code">　注： 词典结果只支持中英互译，翻译结果支持英日韩法俄西到中文的翻译以及中文到英语的翻译</p>
+                    <p class="code">errorCode：</p>
+<p class="code">　0 - 正常</p>
+<p class="code">　20 - 要翻译的文本过长</p>
+<p class="code">　30 - 无法进行有效的翻译</p>
+<p class="code">　40 - 不支持的语言类型</p>
+<p class="code">　50 - 无效的key</p>
+<p class="code">　60 - 无词典结果，仅在获取词典结果生效</p>
+                </div>
+                <div class="lInter">
+                    <h3>xml数据格式举例</h3>
+
+                    <div><p>
+    <span class="host">http://fanyi.youdao.com/openapi.do?</span><span class="path">keyfrom=<span class="realKeyfrom">wordskeeper</span>&amp;key=<span class="realKey">1012409051</span></span><span class="para">&amp;type=data&amp;doctype=xml&amp;version=1.1</span><span class="query">&amp;q=这里是有道翻译API</span>
+</p>
+
+<p class="code">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</p>
+<p class="code">&lt;youdao-fanyi&gt;</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&lt;errorCode&gt;0&lt;/errorCode&gt;</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- 有道翻译 --&gt;</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&lt;query&gt;&lt;![CDATA[这里是有道翻译API]]&gt;&lt;/query&gt;</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&lt;translation&gt;</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;paragraph&gt;&lt;![CDATA[Here is the youdao
+    translation API]]&gt;&lt;/paragraph&gt;</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/translation&gt;</p>
+<p class="code">&lt;/youdao-fanyi&gt;</p>
+</div>
+                </div>
+                <div class="lInter">
+                    <h3>json数据格式举例</h3>
+
+                    <div><p>
+    <span class="host">http://fanyi.youdao.com/openapi.do?</span><span class="path">keyfrom=<span class="realKeyfrom">wordskeeper</span>&amp;key=<span class="realKey">1012409051</span></span><span class="para">&amp;type=data&amp;doctype=json&amp;version=1.1</span><span class="query">&amp;q=good</span>
+</p>
+
+<p class="code">{</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;"errorCode":0</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;"query":"good",</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;"translation":["好"], // 有道翻译</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;"basic":{ // 有道词典-基本词典</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"phonetic":"gʊd"</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"uk-phonetic":"gʊd"  //英式发音</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"us-phonetic":"ɡʊd" //美式发音</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"explains":[</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"好处",</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"好的"</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"好"</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;},</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;"web":[ // 有道词典-网络释义</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"key":"good",</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value":["良好","善","美好"]</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{...}</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;]</p>
+<p class="code">}</p>
+</div>
+                </div>
+                <div class="lInter">
+                    <h3>jsonp数据格式举例</h3>
+
+                    <div><p>
+    <span class="host">http://fanyi.youdao.com/openapi.do?</span><span class="path">keyfrom=<span class="realKeyfrom">wordskeeper</span>&amp;key=<span class="realKey">1012409051</span></span><span class="para">&amp;type=data&amp;doctype=jsonp&amp;callback=show&amp;version=1.1</span><span class="query">&amp;q=API</span>
+</p>
+
+<p class="code">show({</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;"errorCode":0</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;"query":"API",</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;"translation":["API"], // 有道翻译</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;"basic":{ // 有道词典-基本词典</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"explains":[</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"abbr. 应用程序界面（Application
+    Program Interface）；..."</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;},</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;"web":[ // 有道词典-网络释义</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"key":"API",</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"value":["应用程序接口(Application
+    Programming Interface)","应用编程接口","应用程序编程接口","美国石油协会"]</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{...}</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp;]</p>
+<p class="code">});</p>
+</div>
+                </div>
+            </div>
+            <div class="ft">
+                <span class="ft-a"></span><span class="ft-b"></span><span class="ft-c"></span>
+            </div>
+        </div>
+
+        <div class="mod step">
+            <h2 class="hd">支持与反馈</h2>
+
+            <div class="bd lc lInter">
+                <p>如果您确认发现了BUG，或者您希望请求其它的功能，或者您发布了使用有道翻译API的产品，我们非常希望得到您的消息：</p>
+
+                <p class="bc"><a href="mailto:translate-service@corp.youdao.com">translate-service@corp.youdao.com</a>
+                </p>
+            </div>
+            <div class="ft">
+                <span class="ft-a"></span><span class="ft-b"></span><span class="ft-c"></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="ft">
+    <p class="bc">
+        <a href="http://www.youdao.com/help/fanyiapi/privacy" target="_blank">使用条款</a> -
+        <a href="http://fanyi.youdao.com/" target="_blank">有道翻译</a> -
+        <a href="http://cidian.youdao.com/" target="_blank">有道词典</a> -
+        <a href="http://www.youdao.com/" target="_blank">有道首页</a> -
+        <a href="http://www.youdao.com/about/index.html" target="_blank">关于有道</a> -
+        <a href="http://i.youdao.com/" target="_blank">官方博客</a> -
+        <a href="http://techblog.youdao.com/" target="_blank">有道技术沙龙</a>
+    </p>
+
+    <p class="gc">© 2016 网易公司 京ICP证080268号</p>
+</div>
+</div>
+
+
+<script type="text/javascript" src="./有道翻译API_files/jquery-1.6.2.min.js.下载"></script>
+<script type="text/javascript" src="./有道翻译API_files/all-packed.js.下载"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        YoudaoFanyiApi.dataMode.init();
+    });
+</script>
+
+</body></html>
