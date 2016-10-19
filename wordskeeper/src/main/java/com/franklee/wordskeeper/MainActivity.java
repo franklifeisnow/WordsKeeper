@@ -1,4 +1,4 @@
-package com.example.wordskeeper;
+package com.franklee.wordskeeper;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
