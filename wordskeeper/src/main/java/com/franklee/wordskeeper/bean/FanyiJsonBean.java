@@ -1,6 +1,8 @@
 package com.franklee.wordskeeper.bean;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,9 +12,9 @@ import java.util.List;
 public class FanyiJsonBean implements Serializable {
     private int errorCode;
     private String query;
-    private String translation;
+    private ArrayList<String> translation;
     private BasicBean basic;
-    private List<WebBean> web;
+    private ArrayList<WebBean> web;
 
     public int getErrorCode() {
         return errorCode;
@@ -30,11 +32,11 @@ public class FanyiJsonBean implements Serializable {
         this.query = query;
     }
 
-    public String getTranslation() {
+    public ArrayList<String> getTranslation() {
         return translation;
     }
 
-    public void setTranslation(String translation) {
+    public void setTranslation(ArrayList<String> translation) {
         this.translation = translation;
     }
 
@@ -46,11 +48,11 @@ public class FanyiJsonBean implements Serializable {
         this.basic = basic;
     }
 
-    public List<WebBean> getWeb() {
+    public ArrayList<WebBean> getWeb() {
         return web;
     }
 
-    public void setWeb(List<WebBean> web) {
+    public void setWeb(ArrayList<WebBean> web) {
         this.web = web;
     }
 }

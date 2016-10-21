@@ -1,5 +1,8 @@
 package com.franklee.wordskeeper.bean;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
@@ -9,7 +12,9 @@ import java.io.Serializable;
 public class BasicBean implements Serializable {
 
     private String phonetic;
+    @SerializedName("uk-phonetic")
     private String uk_phonetic;//英式发音
+    @SerializedName("us-phonetic")
     private String us_phonetic;//美式发音
     private String[] explains;
 
