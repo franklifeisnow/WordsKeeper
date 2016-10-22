@@ -23,7 +23,7 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
 
     SearchView searchView;
 
-    TextView textView2, textView3, textView4;
+    TextView textView2, textView3, textView4, textView5;
 
     FanyiJsonBean fanyiBean;
     @Override
@@ -37,13 +37,14 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
 
         searchView.setSubmitButtonEnabled(true);
 
-        searchView.setQueryHint("输入");
+//        searchView.setQueryHint("输入");
 
         searchView.setOnQueryTextListener(this);
 
         textView2 = (TextView) findViewById(R.id.textView2);
         textView3 = (TextView) findViewById(R.id.textView3);
         textView4 = (TextView) findViewById(R.id.textView4);
+        textView5 = (TextView) findViewById(R.id.textView5);
     }
 
     @Override
@@ -54,7 +55,6 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -85,10 +85,31 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
     }
 
     private void showView() {
-        textView2.setText(fanyiBean.getTranslation().get(0));
-        textView3.setText("["+fanyiBean.getBasic().getUk_phonetic()+"]");
-        textView4.setText("["+fanyiBean.getBasic().getUs_phonetic()+"]");
+        if(fanyiBean.getTranslation() != null && fanyiBean.getTranslation().size() > 0){
+            StringBuffer strBuff = new StringBuffer();
+            for(String str : fanyiBean.getTranslation()){
+                strBuff.append(str).append(",").delete(strBuff.length()-1,strBuff.length());
+            }
+            textView2.setText(strBuff);
+        }
+        if(fanyiBean.getBasic() != null){
+            StringBuffer strBuff = new StringBuffer();
+            strBuff
+//                    .append("["+fanyiBean.getBasic().getPhonetic()+"] ")
+                    .append("英["+fanyiBean.getBasic().getUk_phonetic()+"]")
+                    .append("  美["+fanyiBean.getBasic().getUs_phonetic()+"]");
+            textView3.setText(strBuff);
+        }
+
+
+        textView4.setText("");
     }
 
-
+    @Override
+    protected void onResume() {
+        if(searchView != null){
+            searchView.requestFocus();
+        }
+        super.onResume();
+    }
 }

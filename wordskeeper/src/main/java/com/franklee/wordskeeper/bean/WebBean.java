@@ -1,6 +1,7 @@
 package com.franklee.wordskeeper.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by Lijinpeng on 2016/10/19.
@@ -8,7 +9,7 @@ import java.io.Serializable;
 
 public class WebBean implements Serializable {
     private String key;
-    private String[] value;
+    private ArrayList<String> value;
 
     public String getKey() {
         return key;
@@ -18,11 +19,11 @@ public class WebBean implements Serializable {
         this.key = key;
     }
 
-    public String[] getValue() {
+    public ArrayList<String> getValue() {
         return value;
     }
 
-    public void setValue(String[] value) {
+    public void setValue(ArrayList<String> value) {
         this.value = value;
     }
 }

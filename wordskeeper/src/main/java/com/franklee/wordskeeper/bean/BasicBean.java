@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by Lijinpeng on 2016/10/19.
@@ -16,7 +17,7 @@ public class BasicBean implements Serializable {
     private String uk_phonetic;//英式发音
     @SerializedName("us-phonetic")
     private String us_phonetic;//美式发音
-    private String[] explains;
+    private ArrayList<String> explains;
 
     public String getPhonetic() {
         return phonetic;
@@ -42,11 +43,11 @@ public class BasicBean implements Serializable {
         this.us_phonetic = us_phonetic;
     }
 
-    public String[] getExplains() {
+    public ArrayList<String> getExplains() {
         return explains;
     }
 
-    public void setExplains(String[] explains) {
+    public void setExplains(ArrayList<String> explains) {
         this.explains = explains;
     }
 }
