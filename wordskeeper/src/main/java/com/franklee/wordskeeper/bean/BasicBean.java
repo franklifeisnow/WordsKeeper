@@ -19,6 +19,26 @@ public class BasicBean implements Serializable {
     private String us_phonetic;//美式发音
     private ArrayList<String> explains;
 
+    /*use for data binding*/
+    private String str_phonetic;
+    public String getStr_phonetic() {
+        return "英["+uk_phonetic+"] "+ "美["+us_phonetic+"] ";
+    }
+    private String str_explains;
+    public String getStr_explains() {
+        StringBuffer stringBuffer = new StringBuffer();
+        if (explains != null && explains.size() > 0){
+
+            for (String str : explains) {
+                stringBuffer.append(str + ",");
+            }
+            stringBuffer.deleteCharAt(stringBuffer.length() - 1);
+
+        }
+        return stringBuffer.toString();
+    }
+
+
     public String getPhonetic() {
         return phonetic;
     }

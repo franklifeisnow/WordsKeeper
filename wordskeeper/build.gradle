@@ -1,9 +1,12 @@
 apply plugin: 'com.android.application'
 
-
 android {
     compileSdkVersion 24
     buildToolsVersion "22.0.1"
+
+    dataBinding {
+        enabled true
+    }
 
     defaultConfig {
         applicationId "com.franklee.wordskeeper"
@@ -35,3 +38,4 @@ dependencies {
     compile project (':android-volley')
 
 }
+

@@ -1,5 +1,7 @@
 package com.franklee.wordskeeper.bean;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -15,6 +17,23 @@ public class FanyiJsonBean implements Serializable {
     private ArrayList<String> translation;
     private BasicBean basic;
     private ArrayList<WebBean> web;
+
+
+    /*use for data binding*/
+    private String str_translation;
+    public String getStr_translation() {
+        StringBuffer stringBuffer = new StringBuffer();
+        if (translation != null && translation.size() > 0){
+
+            for (String str : translation) {
+                stringBuffer.append(str + ",");
+            }
+            stringBuffer.deleteCharAt(stringBuffer.length() - 1);
+
+        }
+        return stringBuffer.toString();
+
+    }
 
     public int getErrorCode() {
         return errorCode;
