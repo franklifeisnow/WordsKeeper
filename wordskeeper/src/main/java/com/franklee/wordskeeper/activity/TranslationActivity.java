@@ -87,6 +87,14 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
 
     private void showView() {
         binding.setFanyibean(fanyiBean);
+
+        if(fanyiBean.getWeb() != null && fanyiBean.getWeb().size() > 0){
+//            binding.setFanyiweb(true);
+            binding.textView7.setVisibility(View.VISIBLE);
+        }else {
+//            binding.setFanyiweb(false);
+            binding.textView7.setVisibility(View.INVISIBLE);
+        }
         adapter = new TransWebAdapter(this, fanyiBean.getWeb());
         binding.webListView.setAdapter(adapter);
 
