@@ -8,22 +8,20 @@ import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
 import com.franklee.wordskeeper.R;
 import com.franklee.wordskeeper.adapter.TransWebAdapter;
 import com.franklee.wordskeeper.bean.FanyiJsonBean;
 import com.franklee.wordskeeper.databinding.ActivityTranslationBinding;
 import com.google.gson.Gson;
 
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
+
 
 public class TranslationActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private static final String TAG = "TranslationActivity";
-
-    private RequestQueue mRequestQueue;
 
     private FanyiJsonBean fanyiBean;
 
@@ -38,8 +36,6 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
                 this, R.layout.activity_translation);
 //        setContentView(R.layout.activity_translation);
 
-        mRequestQueue = Volley.newRequestQueue(this);
-
         binding.searchEditWord.setSubmitButtonEnabled(true);
         binding.searchEditWord.setOnQueryTextListener(this);
 
@@ -48,7 +44,7 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        getSearchWord(query);
+        getSearchWordByxUtils(query);
         return false;
     }
 
@@ -57,22 +53,30 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
         return false;
     }
 
-    private void getSearchWord(String word) {
-        String url = "http://fanyi.youdao.com/openapi.do?keyfrom=wordskeeper&key=1012409051&type=data&doctype=json&version=1.1&q=" + word;
-        StringRequest stringRequest = new StringRequest(url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e("TAG", response);
-                        parseJSON(response);
-                    }
-                }, new Response.ErrorListener() {
+    private void getSearchWordByxUtils(String word) {
+        RequestParams params = new RequestParams("http://fanyi.youdao.com/openapi.do?keyfrom=wordskeeper&key=1012409051&type=data&doctype=json&version=1.1&q=" + word);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("TAG", error.getMessage(), error);
+            public void onSuccess(String result) {
+                parseJSON(result);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+
+            }
+
+            @Override
+            public void onFinished() {
+
             }
         });
-        mRequestQueue.add(stringRequest);
     }
 
     private void parseJSON(String response) {
@@ -88,10 +92,10 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
     private void showView() {
         binding.setFanyibean(fanyiBean);
 
-        if(fanyiBean.getWeb() != null && fanyiBean.getWeb().size() > 0){
+        if (fanyiBean.getWeb() != null && fanyiBean.getWeb().size() > 0) {
 //            binding.setFanyiweb(true);
             binding.textView7.setVisibility(View.VISIBLE);
-        }else {
+        } else {
 //            binding.setFanyiweb(false);
             binding.textView7.setVisibility(View.INVISIBLE);
         }

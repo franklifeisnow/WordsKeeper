@@ -1,1 +1,1 @@
-include ':wordskeeper', ':android-volley'
+include ':wordskeeper'

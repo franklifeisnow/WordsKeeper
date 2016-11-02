@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HelloWorld.iml" filepath="$PROJECT_DIR$/HelloWorld.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android-volley/android-volley.iml" filepath="$PROJECT_DIR$/android-volley/android-volley.iml" />
       <module fileurl="file://$PROJECT_DIR$/wordskeeper/wordskeeper.iml" filepath="$PROJECT_DIR$/wordskeeper/wordskeeper.iml" />
     </modules>
   </component>
