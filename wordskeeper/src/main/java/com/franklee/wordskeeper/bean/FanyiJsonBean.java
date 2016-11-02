@@ -1,5 +1,8 @@
 package com.franklee.wordskeeper.bean;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+
 import com.google.gson.annotations.Expose;
 
 import java.io.Serializable;
@@ -11,15 +14,13 @@ import java.util.List;
  * Created by Lijinpeng on 2016/10/19.
  */
 
-public class FanyiJsonBean implements Serializable {
+public class FanyiJsonBean extends BaseObservable {
     private int errorCode;
     private String query;
     private ArrayList<String> translation;
     private BasicBean basic;
     private ArrayList<WebBean> web;
 
-
-    /*use for data binding*/
     private String str_translation;
     public String getStr_translation() {
         StringBuffer stringBuffer = new StringBuffer();
@@ -67,6 +68,7 @@ public class FanyiJsonBean implements Serializable {
         this.basic = basic;
     }
 
+    @Bindable
     public ArrayList<WebBean> getWeb() {
         return web;
     }

@@ -4,7 +4,9 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -12,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.franklee.wordskeeper.R;
+import com.franklee.wordskeeper.adapter.TransWebAdapter;
 import com.franklee.wordskeeper.bean.FanyiJsonBean;
 import com.franklee.wordskeeper.databinding.ActivityTranslationBinding;
 import com.google.gson.Gson;
@@ -23,6 +26,8 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
     private RequestQueue mRequestQueue;
 
     private FanyiJsonBean fanyiBean;
+
+    private TransWebAdapter adapter;
 
     private ActivityTranslationBinding binding;
 
@@ -82,7 +87,17 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
 
     private void showView() {
         binding.setFanyibean(fanyiBean);
-//        binding.webListView.setAdapter();
+        adapter = new TransWebAdapter(this, fanyiBean.getWeb());
+        binding.webListView.setAdapter(adapter);
+
+        View.OnClickListener itemClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getBaseContext(), v.getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
+            }
+        };
+        adapter.setOnclickListener(itemClickListener);
+
     }
 
 
