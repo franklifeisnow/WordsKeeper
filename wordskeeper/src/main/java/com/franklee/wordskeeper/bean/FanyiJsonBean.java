@@ -68,7 +68,6 @@ public class FanyiJsonBean extends BaseObservable {
         this.basic = basic;
     }
 
-    @Bindable
     public ArrayList<WebBean> getWeb() {
         return web;
     }

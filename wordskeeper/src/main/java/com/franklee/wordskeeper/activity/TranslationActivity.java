@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.franklee.wordskeeper.R;
 import com.franklee.wordskeeper.adapter.TransWebAdapter;
+import com.franklee.wordskeeper.api.ApiService;
+import com.franklee.wordskeeper.api.FanyiInterceptor;
 import com.franklee.wordskeeper.bean.FanyiJsonBean;
 import com.franklee.wordskeeper.databinding.ActivityTranslationBinding;
 import com.google.gson.Gson;
@@ -18,6 +20,12 @@ import com.google.gson.Gson;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
+
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class TranslationActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
@@ -44,7 +52,8 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        getSearchWordByxUtils(query);
+//        getSearchWordByxUtils(query);
+        getSearchWordByRetrofit(query);
         return false;
     }
 
@@ -53,6 +62,9 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
         return false;
     }
 
+    /*
+        net by xUtils
+     */
     private void getSearchWordByxUtils(String word) {
         RequestParams params = new RequestParams("http://fanyi.youdao.com/openapi.do?keyfrom=wordskeeper&key=1012409051&type=data&doctype=json&version=1.1&q=" + word);
         x.http().get(params, new Callback.CommonCallback<String>() {
@@ -74,6 +86,45 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
 
             @Override
             public void onFinished() {
+
+            }
+        });
+    }
+    /*
+        net by Retrofit
+     */
+    private void getSearchWordByRetrofit(String word){
+
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new FanyiInterceptor())
+                .build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://fanyi.youdao.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+//                .client(new OkHttpClient().newBuilder().addInterceptor(new FanyiInterceptor()));
+                .callFactory(okHttpClient)
+                .build();
+
+
+        ApiService mApiService = retrofit.create(ApiService.class);
+
+//        Call<FanyiJsonBean> call = mApiService.getFanyiByAll("wordskeeper", 1012409051, "data", "json", "1.1", word);
+        Call<FanyiJsonBean> call = mApiService.getFanyiByone(word);
+
+        call.enqueue(new retrofit2.Callback<FanyiJsonBean>() {
+            @Override
+            public void onResponse(Call<FanyiJsonBean> call, Response<FanyiJsonBean> response) {
+                if (response.body() instanceof FanyiJsonBean) {
+                    fanyiBean = response.body();
+                    showView();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FanyiJsonBean> call, Throwable t) {
 
             }
         });
