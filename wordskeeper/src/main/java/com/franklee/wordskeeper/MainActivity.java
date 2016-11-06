@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,11 +15,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.franklee.wordskeeper.activity.TranslationActivity;
+import com.franklee.wordskeeper.ui.TranslationActivity;
+
+import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String tag = "DEBUG";
 
     NavigationView navigationView;
 
@@ -102,14 +112,69 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-            Snackbar.make(navigationView, "test left menu click", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+//            Snackbar.make(navigationView, "test left menu click", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show();
 
+//            sender.subscribe(receiver);
+
+            test002();
+//
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    Observable<String> sender = Observable.create(new Observable.OnSubscribe<String>(){
+        @Override
+        public void call(Subscriber<? super String> subscriber){
+
+            subscriber.onNext("Hi, onNext");
+        }
+    });
+
+    Observer<String> receiver = new Observer<String>() {
+        @Override
+        public void onCompleted() {
+            //数据接收完成时调用
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            //发生错误调用
+        }
+
+        @Override
+        public void onNext(String s) {
+            //正常接收数据调用
+            Log.d(tag, s);
+        }
+    };
+
+    private void test001(){
+        String[] names = new String[]{"lee","frank"};
+            Observable.from(names)
+                    .subscribe(new Action1<String>() {
+                        @Override
+                        public void call(String name) {
+                            Log.d(tag, name);
+                        }
+                    });
+    }
+
+    private void test002(){
+
+        Observable.just(1, 2, 3, 4)
+                .subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
+                .observeOn(AndroidSchedulers.mainThread()) // 指定 Subscriber 的回调发生在主线程
+                .subscribe(new Action1<Integer>() {
+                    @Override
+                    public void call(Integer number) {
+                        Log.d(tag, "number:" + number);
+                    }
+                });
     }
 }

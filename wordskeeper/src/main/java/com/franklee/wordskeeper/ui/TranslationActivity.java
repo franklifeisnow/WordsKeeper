@@ -1,4 +1,4 @@
-package com.franklee.wordskeeper.activity;
+package com.franklee.wordskeeper.ui;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +21,8 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.io.InputStream;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -37,6 +39,8 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
 
     private ActivityTranslationBinding binding;
 
+    private String query;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +51,15 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
         binding.searchEditWord.setSubmitButtonEnabled(true);
         binding.searchEditWord.setOnQueryTextListener(this);
 
+//        binding.setClick(this);
 
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
 //        getSearchWordByxUtils(query);
+
+        this.query = query;
         getSearchWordByRetrofit(query);
         return false;
     }
@@ -129,6 +136,42 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
             }
         });
     }
+    /*
+        net by Retrofit
+     */
+    private void getReadWordByRetrofit(String word){
+
+
+//        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//                .addInterceptor(new FanyiInterceptor())
+//                .build();
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://dict.youdao.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+//                .callFactory(okHttpClient)
+                .build();
+
+
+        ApiService mApiService = retrofit.create(ApiService.class);
+
+        Call<InputStream> call = mApiService.getFanyiRead(word);
+
+        call.enqueue(new retrofit2.Callback<InputStream>() {
+            @Override
+            public void onResponse(Call<InputStream> call, Response<InputStream> response) {
+                if (response != null) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<InputStream> call, Throwable t) {
+                Log.e("DEBUG",""+t.toString());
+            }
+        });
+    }
 
     private void parseJSON(String response) {
 
@@ -144,10 +187,8 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
         binding.setFanyibean(fanyiBean);
 
         if (fanyiBean.getWeb() != null && fanyiBean.getWeb().size() > 0) {
-//            binding.setFanyiweb(true);
             binding.textView7.setVisibility(View.VISIBLE);
         } else {
-//            binding.setFanyiweb(false);
             binding.textView7.setVisibility(View.INVISIBLE);
         }
         adapter = new TransWebAdapter(this, fanyiBean.getWeb());
@@ -169,4 +210,12 @@ public class TranslationActivity extends AppCompatActivity implements SearchView
 
         super.onResume();
     }
+
+
+    public void click(View view) {
+        getReadWordByRetrofit(query);
+
+    }
+
+
 }

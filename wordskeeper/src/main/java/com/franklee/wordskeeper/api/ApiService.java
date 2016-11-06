@@ -2,6 +2,8 @@ package com.franklee.wordskeeper.api;
 
 import com.franklee.wordskeeper.bean.FanyiJsonBean;
 
+import java.io.InputStream;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -21,4 +23,7 @@ public interface ApiService {
                                  @Query("q") String work);
     @GET("openapi.do")
     Call<FanyiJsonBean> getFanyiByone( @Query("q") String work);
+
+    @GET("dictvoice")
+    Call<InputStream> getFanyiRead(@Query("audio") String audio);
 }

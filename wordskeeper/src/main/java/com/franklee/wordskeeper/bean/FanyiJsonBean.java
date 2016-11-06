@@ -1,20 +1,15 @@
 package com.franklee.wordskeeper.bean;
 
 import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 
-import com.google.gson.annotations.Expose;
-
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Created by Lijinpeng on 2016/10/19.
  */
-
 public class FanyiJsonBean extends BaseObservable {
+
     private int errorCode;
     private String query;
     private ArrayList<String> translation;
