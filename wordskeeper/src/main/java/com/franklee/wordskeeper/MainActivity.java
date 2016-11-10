@@ -1,6 +1,7 @@
 package com.franklee.wordskeeper;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.franklee.wordskeeper.ui.TestActivity;
 import com.franklee.wordskeeper.ui.TranslationActivity;
 
 import rx.Observable;
@@ -108,8 +110,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
+            String test = "翻译";
+            Uri  uri = Uri.parse("http://www.baidu.com/s?wd="+test);
+            Intent  intent = new  Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+
 
         } else if (id == R.id.nav_share) {
+            startActivity(new Intent(this, TestActivity.class));
 
         } else if (id == R.id.nav_send) {
 //            Snackbar.make(navigationView, "test left menu click", Snackbar.LENGTH_LONG)
