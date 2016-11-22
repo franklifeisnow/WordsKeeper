@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,6 +17,7 @@ import android.view.MenuItem;
 
 import com.franklee.wordskeeper.ui.TestActivity;
 import com.franklee.wordskeeper.ui.TranslationActivity;
+import com.franklee.jandan.JandanActivity;
 
 import rx.Observable;
 import rx.Observer;
@@ -105,7 +105,10 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_jd) {
+            //TODO jandan page
+
+            startActivity(new Intent(this, JandanActivity.class));
 
         } else if (id == R.id.nav_slideshow) {
 
